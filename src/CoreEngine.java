@@ -15,20 +15,15 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 
-public class CoreEngine extends JPanel {
-	private int width ;
-	private int height ;
-	
-	private int nest=1;
-	
+public class CoreEngine extends JPanel {	
+	private int nest=4;
+	private Randomization ran;
+	private double x=1.0;
+	private double y=1.0;
 	
 	public CoreEngine(){
-		
+		 this.ran = new Randomization();
 		setPreferredSize(new Dimension(400,320));
-		
-		
-		
-	
 		
 	}
 	
@@ -40,38 +35,29 @@ public class CoreEngine extends JPanel {
 	}
 	
 	public void creatArt(Graphics g){
-		
-		dynamicFunction(g,nest);
-		//test(g,nest);
-		
-	}
-	
-	public void test(Graphics g ,int nested){
-		g.drawOval(50, 50, 400, 400);
-	}
-	
-	private void dynamicFunction(Graphics g,int nested){
-		for(int j = 0 ; j<666;j++){
-			g.setColor(dynamicColor());
-			g.drawLine(0,j,666,j);
+		for(int h =0;h<getHeight();h++){
+			for(int v =0;v<getWidth();v++){
+				
+				double R = 10;//ran.randomFunction(this.x, this.y, nest) ;
+				double G =10;// ran.randomFunction(this.x, this.y, nest) ;
+				double B = 10;//ran.randomFunction(this.x, this.y, nest) ;
+				System.out.println(R);
+				Color color = new Color(decodeColor(R),decodeColor(G),decodeColor(B));
+				g.setColor(color);
+				g.fillRect(v, h, 1, 1);
+				
+			}
 		}
-		
-		for(int x=0;x<359;x++){
-			 g.drawOval(170,x-300,x+10,x);
-		}
-	
-		for(int x=300;x>0;x--){
-			g.setColor(dynamicColor());
-			 g.drawOval(x-100,170,x-10,x);
-		}
-		
 	}
 	
-	private Color dynamicColor(){
-		int r = (int)(256*Math.random());
-		int g = (int)(256*Math.random());
-		int b = (int)(256*Math.random());
-		return new Color(r,g,b);
+	
+	public int decodeColor(double color){
+	   	
+		int c = (int)(color%257);
+		
+	return c;
 	}
+	
+	
 
 }

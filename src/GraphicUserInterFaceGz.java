@@ -26,9 +26,8 @@ public class GraphicUserInterFaceGz extends JFrame {
 		setLayout(new BorderLayout());
 
 		add(setOutputLabel(), BorderLayout.SOUTH);
-		add(setScreenLabel(), BorderLayout.CENTER);
 		add(setSettingLabel(), BorderLayout.EAST);
-		
+		add(setScreenLabel(), BorderLayout.CENTER);
 		setVisible(true);
 
 	}
