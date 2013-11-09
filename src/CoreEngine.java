@@ -38,9 +38,10 @@ public class CoreEngine extends JPanel {
 			    double y = ((((double) h) / getHeight()) * 2.0) - 1.0;
 
 				System.out.println(x+ "   "+y);
-				double R = ranR.randomFunction(x,y, nest);
-	            double G = ranG.randomFunction(x,y, nest);
-				double B = ranB.randomFunction(x,y, nest);
+				int i = (int)(Math.random()*3);
+				double R = ranR.randomFunction(x,y, nest,i);
+	            double G = ranG.randomFunction(x,y, nest,i);
+				double B = ranB.randomFunction(x,y, nest,i);
 
 
 				

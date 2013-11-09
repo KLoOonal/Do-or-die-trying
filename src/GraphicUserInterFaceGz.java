@@ -45,7 +45,7 @@ public class GraphicUserInterFaceGz extends JFrame {
 	//	labelScreen2.setBackground(Color.black);
 		//labelScreen2.setPreferredSize(new Dimension(400, 320));
 		labelScreen.add(core);
-
+       
 		return labelScreen;
 	}
 	

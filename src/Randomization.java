@@ -7,10 +7,9 @@ public abstract  class Randomization {
    
 	
 	
-    public abstract double randomFunction(double x ,double y,int nest);
+    public abstract double randomFunction(double x ,double y,int nest,int i);
 
-	
-  
+
     
 
 
@@ -22,18 +21,11 @@ public double cos(double x){
 	return Math.cos(Math.PI*x);
 }
 
-public double avg(double x ,double y){
-	if(x+y!=0){
-	return x+y/2;
-	}else {
-		return 1;
-	}
+public double asin(double x){
+	return Math.asin(Math.PI*x);
 }
-
-
-public double time(double x, double y){
-              
-	return x*y;	
+public double acos(double x){
+	return Math.acos(Math.PI*x);
 }
 }
 
