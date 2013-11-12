@@ -17,9 +17,9 @@ public class CoreEngine extends JPanel {
 	private Randomization ranB;
 
 	public CoreEngine() {
-		this.ranR = new RandR();
-		this.ranG = new RandG();
-		this.ranB = new RandB();
+		this.ranR = new Randomization();
+		this.ranG = new Randomization();
+		this.ranB = new Randomization();
 		setPreferredSize(new Dimension(400, 320));
 
 	}
@@ -38,11 +38,14 @@ public class CoreEngine extends JPanel {
 			    double y = ((((double) h) / getHeight()) * 2.0) - 1.0;
 
 				System.out.println(x+ "   "+y);
-				int i = (int)(Math.random()*3);
-				double R = ranR.randomFunction(x,y, nest,i);
-	            double G = ranG.randomFunction(x,y, nest,i);
-				double B = ranB.randomFunction(x,y, nest,i);
-
+				
+				double R = ranR.Randomize(x,y, 4);
+	          double G = ranG.Randomize(x,y, 4);
+			   double B = ranB.Randomize(x,y, 4);
+				
+				//double R = Math.sin(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x);
+				//double G = Math.sin(Math.PI*x)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y);
+			//	double B = Math.sin(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*x)+Math.cos(Math.PI*x);
 
 				
 				System.out.println(R + "  " + G + "  " + B);
