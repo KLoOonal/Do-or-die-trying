@@ -1,13 +1,8 @@
 
+interface Randomization {
 
- interface Randomization {
+	public abstract double reValue(double x, double y);
 
-	 public abstract double reValue(double x, double y);
-
-	 public abstract String reString();
-
-	
-	 
+	public abstract String reString();
 
 }
-
