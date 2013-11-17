@@ -18,9 +18,9 @@ public class CoreEngine extends JPanel {
 
 	public CoreEngine(int nest) {
 		this.nest =nest;
-		int r = (int)(Math.random()*5);
-		int g = (int)(Math.random()*5);
-		int b = (int)(Math.random()*5);
+		int r = (int)(Math.random()*3);
+		int g = (int)(Math.random()*3);
+		int b = (int)(Math.random()*3);
 		
 		this.ranR = new Starter(nest,r);
 		this.ranG = new Starter(nest,g);

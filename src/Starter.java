@@ -9,7 +9,7 @@ public class Starter extends Suit {
      public Starter(int nest,int i){
     	 this. i = i;
     	 
-    	 int j = (int)(Math.random()*5);
+    	 int j = (int)(Math.random()*3);
     	 if(nest>1){
     	 leave = new Starter(nest-1,j);
     	 leaveReseve =  new Starter(nest-1,j);
