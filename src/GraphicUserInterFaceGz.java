@@ -40,7 +40,7 @@ public class GraphicUserInterFaceGz extends JFrame {
 		((TitledBorder) title).setTitleJustification(TitledBorder.CENTER);
 		labelScreen.setBorder(title);
 		labelScreen.setPreferredSize(new Dimension(400,320));
-		CoreEngine core = new CoreEngine();
+		CoreEngine core = new CoreEngine((int)(Math.random()*8+4));
 	//	//JPanel labelScreen2 = new JPanel();
 	//	labelScreen2.setBackground(Color.black);
 		//labelScreen2.setPreferredSize(new Dimension(400, 320));

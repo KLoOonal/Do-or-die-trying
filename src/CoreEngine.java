@@ -11,15 +11,20 @@ import javax.swing.JPanel;
 import java.awt.Color;
 
 public class CoreEngine extends JPanel {
-	private int nest = 4;
+	private int nest ;
 	private Randomization ranR;
 	private Randomization ranG;
 	private Randomization ranB;
 
-	public CoreEngine() {
-		this.ranR = new Randomization();
-		this.ranG = new Randomization();
-		this.ranB = new Randomization();
+	public CoreEngine(int nest) {
+		this.nest =nest;
+		int r = (int)(Math.random()*5);
+		int g = (int)(Math.random()*5);
+		int b = (int)(Math.random()*5);
+		
+		this.ranR = new Starter(nest,r);
+		this.ranG = new Starter(nest,g);
+		this.ranB = new Starter(nest,b);
 		setPreferredSize(new Dimension(400, 320));
 
 	}
@@ -39,14 +44,16 @@ public class CoreEngine extends JPanel {
 
 				System.out.println(x+ "   "+y);
 				
-				double R = ranR.Randomize(x,y, 4);
-	          double G = ranG.Randomize(x,y, 4);
-			   double B = ranB.Randomize(x,y, 4);
+		      double R = ranR.reValue(x,y);
+	          double G = ranG.reValue(x,y);
+			   double B = ranB.reValue(x,y);
 				
-				//double R = Math.sin(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x);
-				//double G = Math.sin(Math.PI*x)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y);
-			//	double B = Math.sin(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*x)+Math.cos(Math.PI*y)+Math.cos(Math.PI*x)+Math.cos(Math.PI*x)+Math.cos(Math.PI*x);
-
+				//double R = Math.cos(Math.PI*Math.cos(x));
+				//double G =Math.sin(Math.PI*Math.cos(Math.PI*x)) + Math.cos(Math.PI*Math.cos(Math.PI*x));
+				//double B = Math.sin(Math.PI*Math.sin(Math.PI*x));
+				System.out.println(ranR.reString());
+				System.out.println(ranG.reString());
+				System.out.println(ranB.reString());
 				
 				System.out.println(R + "  " + G + "  " + B);
 				Color color = new Color(decodeColor(R), decodeColor(G),
@@ -55,7 +62,7 @@ public class CoreEngine extends JPanel {
 				System.out.println("G" + decodeColor(G));
 				System.out.println("B" + decodeColor(B));
 				g.setColor(color);
-				g.fillRect(v, h, 1, 1);
+				g.fillRect(v, h, h, v);
 			
 
 			}
@@ -66,16 +73,21 @@ public class CoreEngine extends JPanel {
 
 	public int decodeColor(double color) {
 		
-		color = color+ 1.0;
-		if (color < 0) {
-			color =color*( -1);
-		}
+		 color = color+1.0;
+		
+		 if (color < 0) {
+				color =color*( -1);
+			}
 		color =color/ 2.0;
 		int c = (int) (color * 255);
+		
+		
 		if (c >= 255) {
 			c = 255;
 		}
 		return c;
+		
+		
 	}
 
 }
