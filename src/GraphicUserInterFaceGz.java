@@ -3,10 +3,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.JPanel;
 
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Choice;
 import java.awt.Color;
@@ -15,35 +17,46 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.awt.TextField;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 public class GraphicUserInterFaceGz extends JFrame {
+	private CoreEngine core;
+	private TextField text1, text2, text3,nameText,by;
+	private JLabel main;
+	private Choice cc, cd, st;
 
 	public GraphicUserInterFaceGz() {
-		setTitle("Art Generator : Prototype");
-		setSize(640, 480);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		main = new JLabel(new ImageIcon("Image/back1.jpg"));	
 		setLayout(new BorderLayout());
+		add(main);
+		main.setLayout(new BorderLayout());
+		setScreenLabel();
+		setSettingLabel();
+		setOutputLabel();
 
-		add(setOutputLabel(), BorderLayout.SOUTH);
-		add(setSettingLabel(), BorderLayout.EAST);
-		add(setScreenLabel(), BorderLayout.CENTER);
-		setVisible(true);
+		
 
 	}
 
-	private JPanel setScreenLabel() {
-		JPanel labelScreen = new JPanel();
+	private void setScreenLabel() {
+		JLabel Bitjla = new JLabel();
 		Border title = BorderFactory.createTitledBorder("Image");
 		((TitledBorder) title).setTitleJustification(TitledBorder.CENTER);
-		labelScreen.setBorder(title);
-		labelScreen.setPreferredSize(new Dimension(400, 320));
-		CoreEngine core = new CoreEngine((int) (Math.random() * 8 + 4));
-		// //JPanel labelScreen2 = new JPanel();
-		// labelScreen2.setBackground(Color.black);
-		// labelScreen2.setPreferredSize(new Dimension(400, 320));
+		JPanel labelScreen = new JPanel();
+		Bitjla.setBorder(title);
+		Bitjla.setPreferredSize(new Dimension(400,200));
+		Bitjla.setLayout(new FlowLayout());
+		
+		labelScreen.setPreferredSize(new Dimension(410, 330));
+		core = new CoreEngine((int) (Math.random() * 8 + 4));
 		labelScreen.add(core);
-
-		return labelScreen;
+        Bitjla.add(labelScreen);
+		
+		
+		main.add(Bitjla, BorderLayout.CENTER);
+		
 	}
 
 	/**
@@ -52,50 +65,26 @@ public class GraphicUserInterFaceGz extends JFrame {
 	 * return core; }
 	 **/
 
-	private JPanel setSettingLabel() {
-		JPanel labelSetting = new JPanel();
+	private void setSettingLabel() {
+		JLabel labelSetting = new JLabel();
 		labelSetting.setPreferredSize(new Dimension(160, 30));
 		labelSetting.setLayout(new FlowLayout());
 		labelSetting.add(settingBar());
-		labelSetting.add(settingBar2());
 
-		JLabel logo = new JLabel(new ImageIcon("Image/icon.png"));
-		labelSetting.add(logo);
-
+	
+		Border title = BorderFactory.createTitledBorder("Setting");
+		((TitledBorder) title).setTitleJustification(TitledBorder.RIGHT);
+        labelSetting.setBorder(title);
 		labelSetting.add(generateBut());
+		labelSetting.add(exportImage());
+			
 
-		return labelSetting;
+		main.add(labelSetting, BorderLayout.EAST);
 	}
 
 	private JPanel settingBar() {
-		JPanel bar = new JPanel();
-		bar.setBorder(new TitledBorder("Input Value"));
-		((TitledBorder) bar.getBorder())
-				.setTitleJustification(TitledBorder.RIGHT);
-		bar.setLayout(new GridLayout(2, 2, 1, 3));
-		JLabel x = new JLabel();
-		x.setText("X value");
-		JLabel y = new JLabel();
-		y.setText("Y value");
-
-		TextField xValue = new TextField();
-		xValue.setPreferredSize(new Dimension(70, 30));
-		TextField yValue = new TextField();
-		yValue.setPreferredSize(new Dimension(70, 30));
-
-		bar.add(x);
-		bar.add(xValue);
-		bar.add(y);
-		bar.add(yValue);
-		return bar;
-	}
-
-	private JPanel settingBar2() {
 		JPanel bar2 = new JPanel();
-		bar2.setBorder(new TitledBorder("Setting"));
-		((TitledBorder) bar2.getBorder())
-				.setTitleJustification(TitledBorder.RIGHT);
-		bar2.setLayout(new GridLayout(4, 2, 1, 3));
+		bar2.setLayout(new GridLayout(5, 2, 1, 3));
 
 		JLabel name = new JLabel();
 		name.setText("Pic Name");
@@ -104,17 +93,23 @@ public class GraphicUserInterFaceGz extends JFrame {
 		JLabel color = new JLabel();
 		color.setText("Color");
 		JLabel dif = new JLabel();
-		dif.setText("Nest");
+		dif.setText("Quality");
+		JLabel sty = new JLabel();
+		sty.setText("Style");
 
-		TextField nameText = new TextField();
-		TextField by = new TextField();
-		Choice cc = new Choice();
+		 nameText = new TextField();
+		 by = new TextField();
+		cc = new Choice();
 		cc.addItem("RGB");
 		cc.addItem("Gray");
-		Choice cd = new Choice();
+		cd = new Choice();
 		cd.addItem("Low");
 		cd.addItem("Mediem");
 		cd.addItem("High");
+		st = new Choice();
+		st.addItem("Ex");
+		st.addItem("Beta");
+		st.addItem("Final");
 
 		bar2.add(name);
 		bar2.add(nameText);
@@ -124,28 +119,123 @@ public class GraphicUserInterFaceGz extends JFrame {
 		bar2.add(cc);
 		bar2.add(dif);
 		bar2.add(cd);
+		bar2.add(sty);
+		bar2.add(st);
 
 		return bar2;
 	}
 
 	private JButton generateBut() {
-		JButton but = new JButton("Generate");
+		JButton but = new JButton(new ImageIcon(((new ImageIcon("Image/icon.jpg")).getImage()).getScaledInstance(150,130, java.awt.Image.SCALE_SMOOTH))); 
+		but.addActionListener(new ActionListener() {
 
+			public void actionPerformed(ActionEvent e) {
+		
+			
+				
+				// ////////////////////////////////////////////////////////////////////////////////////
+				if (cd.getSelectedIndex() == 0) {
+					 core.setStyle(2);
+				} else if (cd.getSelectedIndex() == 1) {
+					core.setStyle(3);
+				} else if (cd.getSelectedIndex() == 2) {
+					core.setStyle(4);
+				}
+				// /////////////////////////////////////////////////////////////////////////////////////
+				if (st.getSelectedIndex() == 0) {
+                       core.setQuality(60, 60, 60);   
+				} else if (st.getSelectedIndex() == 1) {
+					   core.setQuality(90, 90, 90);
+				} else if (st.getSelectedIndex() == 2) {
+                       core.setQuality(100, 100, 100);
+				}
+				// //////////////////////////////////////////////////////////////////////////////////////////////
+				if (cc.getSelectedIndex() == 0) {
+                       core.setGray(false);
+				} else if (cc.getSelectedIndex() == 1) {
+                       core.setGray(true);
+				}
+				// //////////////////////////////////////////////////////////////////////////////////////////////
+
+				text1.setText("Blaze : " + core.reStringRed());
+				text2.setText("Wind  : " + core.reStringGreen());
+				text3.setText("Frost  : " + core.reStringBlue());
+				
+				repaint();
+				
+			}
+		});
 		return but;
 	}
 
-	private JPanel setOutputLabel() {
+	private JButton exportImage(){
+		JButton but2  = new JButton(new ImageIcon(((new ImageIcon("Image/icon2.jpg")).getImage()).getScaledInstance(150,35, java.awt.Image.SCALE_SMOOTH)));
+		but2.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				String byTemp= "";
+				if(by.getText().equals("")){
+				 byTemp = null;
+				}else if(by.getText()!=null){
+			    byTemp = " by "+by.getText();
+				}
+				 core.setName(nameText.getText(),byTemp);
+				
+				
+				try {
+					core.printc();
+				} catch (IOException | AWTException e1) {
+					
+					e1.printStackTrace();
+				
+			}
+				JOptionPane.showMessageDialog(null, "Your image already save.");
+			}
+		});
+		return but2;
+	}
+	
+	
+	
+	private void setOutputLabel() {
 		JPanel labelOutput = new JPanel();
-		Border title = BorderFactory.createTitledBorder("Function Log");
+		
+		Border title = BorderFactory.createTitledBorder("Function");
 		((TitledBorder) title).setTitleJustification(TitledBorder.LEFT);
-		labelOutput.setBorder(title);
+		
+         JLabel tempPic = new JLabel();
+         tempPic.setLayout(new FlowLayout());
+		tempPic.setBorder(title);
+         tempPic.setPreferredSize(new Dimension(620, 110));
+         
+		labelOutput.setLayout(new GridLayout(3, 1, 1, 1));
+		labelOutput.setPreferredSize(new Dimension(620,80));
 
-		TextArea text = new TextArea(2, 80);
-		text.setEditable(false);
-		text.setBackground(Color.black);
-		labelOutput.add(text);
+		text1 = new TextField();
+		text2 = new TextField();
+		text3 = new TextField();
 
-		return labelOutput;
+		text1.setEditable(false);
+		text1.setBackground(new Color(51,0,102));
+		text2.setEditable(false);
+		text2.setBackground(new Color(51,0,102));
+		text3.setEditable(false);
+		text3.setBackground(new Color(51,0,102));
+
+		text1.setText("Blaze : ");
+		text1.setForeground(Color.RED);
+		text2.setText("Wind  : ");
+		text2.setForeground(Color.GREEN);
+		text3.setText("Frost : ");
+		text3.setForeground(Color.BLUE);
+		
+		labelOutput.add(text1);
+		labelOutput.add(text2);
+		labelOutput.add(text3);
+        
+		tempPic.add(labelOutput);
+		
+		main.add(tempPic, BorderLayout.SOUTH);
 	}
 
 }

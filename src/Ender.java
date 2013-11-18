@@ -9,14 +9,20 @@ public class Ender extends Suit {
 
 	@Override
 	public double reValue(double x, double y) {
-		// int i = (int)(Math.random()*4);
+		
 		if (g == 0) {
 			value = x;
 			word = "x";
 		} else if (g == 1) {
 			value = y;
 			word = "y";
-		}
+		} else if(g==2){
+			value = y+x;
+			word = "y+x";
+		} else if(g==3){
+			value = y*x;
+			word = "y*x";
+		} 
 		return value;
 	}
 

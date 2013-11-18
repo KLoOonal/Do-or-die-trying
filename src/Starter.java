@@ -5,17 +5,17 @@ public class Starter extends Suit {
 	private String word;
 	private int i;
 
-	public Starter(int nest, int i) {
+	public Starter(int nest, int i , int quality,int style) {
 		this.i = i;
 
-		int j = (int) (Math.random() * 90);
+		int j = (int) (Math.random() * quality);
 		if (nest > 1) {
-			leave = new Starter(nest - 1, j);
-			leaveReseve = new Starter(nest - 1, j);
+			leave = new Starter(nest - 1, j,quality,style);
+			leaveReseve = new Starter(nest - 1, j,quality,style);
 		} else {
-			int g1 = (int) (Math.random() * 2);
+			int g1 = (int) (Math.random() * style);
 			leave = new Ender(g1);
-			int g2 = (int) (Math.random() * 2);
+			int g2 = (int) (Math.random() * style);
 			leaveReseve = new Ender(g2);
 		}
 
@@ -38,8 +38,8 @@ public class Starter extends Suit {
 			value = (leave.reValue(x, y)*(leaveReseve.reValue(x,y)));
 			word = "Time(" + leave.reString() + "*"+leaveReseve.reString()+")";
 		} else if (i >= 95 && i<100) {
-			value = Math.pow (leave.reValue(x, y),leaveReseve.reValue(x, y));
-			word = "Power(" + leave.reString()+ ""+leaveReseve.reString()+")";
+			value = Math.abs (leave.reValue(x, y));
+			word = "Absolute(" + leave.reString()+")";
 		}
 		return value;
 	}
