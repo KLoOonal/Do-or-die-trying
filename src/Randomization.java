@@ -1,4 +1,3 @@
-
 interface Randomization {
 
 	public abstract double reValue(double x, double y);
