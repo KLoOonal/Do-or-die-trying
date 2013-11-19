@@ -15,11 +15,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.TextArea;
+
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+
 import java.io.IOException;
 public class GraphicUserInterFaceGz extends JFrame {
 	private CoreEngine core;
@@ -28,14 +28,14 @@ public class GraphicUserInterFaceGz extends JFrame {
 	private Choice cc, cd, st;
 
 	public GraphicUserInterFaceGz() {
-		main = new JLabel(new ImageIcon("Image/back1.jpg"));	
+		main = new JLabel(new ImageIcon(this.getClass().getResource("Image/back1.jpg")));	
 		setLayout(new BorderLayout());
 		add(main);
 		main.setLayout(new BorderLayout());
 		setScreenLabel();
 		setSettingLabel();
 		setOutputLabel();
-
+		
 		
 
 	}
@@ -126,7 +126,7 @@ public class GraphicUserInterFaceGz extends JFrame {
 	}
 
 	private JButton generateBut() {
-		JButton but = new JButton(new ImageIcon(((new ImageIcon("Image/icon.jpg")).getImage()).getScaledInstance(150,130, java.awt.Image.SCALE_SMOOTH))); 
+		JButton but = new JButton(new ImageIcon(((new ImageIcon(this.getClass().getResource("/Image/icon.jpg"))).getImage()).getScaledInstance(150,130, java.awt.Image.SCALE_SMOOTH))); 
 		but.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -169,7 +169,7 @@ public class GraphicUserInterFaceGz extends JFrame {
 	}
 
 	private JButton exportImage(){
-		JButton but2  = new JButton(new ImageIcon(((new ImageIcon("Image/icon2.jpg")).getImage()).getScaledInstance(150,35, java.awt.Image.SCALE_SMOOTH)));
+		JButton but2  = new JButton(new ImageIcon(((new ImageIcon(this.getClass().getResource("Image/icon2.jpg"))).getImage()).getScaledInstance(150,35, java.awt.Image.SCALE_SMOOTH)));
 		but2.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

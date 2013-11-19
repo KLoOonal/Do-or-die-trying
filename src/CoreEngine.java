@@ -147,12 +147,12 @@ public class CoreEngine extends JPanel {
 	
 	public void printc() throws IOException, AWTException{
 		
-		File file = new File(namepic+name+".jpg");
+		File file = new File(namepic+name+".png");
 		if (!file.exists()){file.createNewFile();}
 		
 		
 		BufferedImage image = new Robot().createScreenCapture(new Rectangle(getLocationOnScreen().x, getLocationOnScreen().y,getWidth(), getHeight() ));
-		ImageIO.write(image, "jpg", file);
+		ImageIO.write(image, "png", file);
 	}
 }
 
